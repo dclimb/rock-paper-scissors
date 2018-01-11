@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>"Rock Paper and Scissors</title>
+</head>
+<body>
+	<p id="res"></p>
+
+</body>
+<script type="text/javascript">
+	
+	let playerScore=0;
+	let computerScore=0;
+	let numberGames;
+
+
+
+
+	function computerPlay() {
+		let result = Math.floor((Math.random() * 3));
+		if (result == 2) {
+			return  "rock";
+		} else if (result == 1) {
+			return  "paper";
+		} else {
+			return "scissors";
+		}
+		// body...
+	}
+
+	function playRound (playerSelection,computerSelection) {
+		let imput = prompt("Rock, Scissors or Paper");
+		playerSelection = imput.toLowerCase();
+
+		if (playerSelection == computerSelection){
+			result == "draw"
+		} else if (playerSelection == "rock") {
+			if (computerSelection == "scissors") {
+				return  ["You Win!","Score: player " + ++playerScore + "computer " + computerScore];
+			} else {
+				return ["You Lose!","Score: player " + playerScore + "computer " + ++computerScore];
+			}
+			
+		} else if (playerSelection == "scissors"){
+			if (computerSelection == "rock") {
+				return "You Lose!",++c;
+			} else {
+				return "You Win",++p;
+			}
+		} else if (playerSelection == "paper") {
+			if (computerSelection == "rock") {
+				return "You Win!",++p;
+			} else {
+				return "You Lose!",++c
+			}
+		// body...
+		}
+
+	const playerSelection = "paper";
+	const computerSelection = computerPlay ();
+	console.log(playRound(playerSelection,computerSelection));
+
+
+
+</script>
+</html>
