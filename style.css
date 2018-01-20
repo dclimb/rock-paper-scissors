@@ -1,0 +1,61 @@
+.header{
+  background-color: #d7eada;
+  margin : 30px  auto;
+  width: 50%;
+  text-align: center;
+  font-family: "russo one";
+  font-size: 32px;
+  border-radius: 5px;
+}
+
+body{
+  background-color: #9aa767;
+}
+
+.title{
+  border-radius: 5px;
+  border-radius: 5 px;
+  margin : 30px  auto;
+  width: 65%;
+  border: 1px solid black;
+  text-align: center;
+  font-family: "russo one";
+
+}
+
+
+
+
+.content{
+  border-radius: 10px;
+  font-family: "russo one";
+  margin: auto;
+  width : 50%;
+  text-align: center;
+  background-color: #d7eada;
+  padding: 15px 0;
+}
+
+.score-left,.score-right{
+  word-wrap: break-word;
+  min-width: 50px;
+  margin: auto;
+  padding: 12px;
+  width: 15%;
+  border: 1px solid black;
+  border-radius: 5px
+}
+
+.score-left{
+  margin-left: 15px;
+  float: left;
+}
+
+.score-right{
+  margin-right: 15px;
+  float: right;
+}
+
+.choices{
+  clear: both;
+}

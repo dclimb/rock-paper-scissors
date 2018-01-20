@@ -1,65 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
+</style>
+<link rel="stylesheet" type="text/css" href="style.css">
+
 	<title>"Rock Paper and Scissors</title>
+
 </head>
 <body>
-	<p id="res"></p>
-
+	<div class="header">Make a choice to start</div>
+	<div class="content">
+		<div class="title">
+			<h1>Rock Paper Sissors</h1>
+		</div>
+		<div class="score">
+			<div class="score-top">
+				<h3>SCORE</h3>
+			</div>
+			<div class="score-left">
+				<p>PLAYER</p>
+				<p id="p-score">0</p>
+			</div>
+			<div class="score-right">
+				<p>CPU</p>
+				<p id="c-score">0</p>
+			</div>
+		</div>
+		<div class="res"></div>
+		<div class="choices">
+			<button class="rock"><img src="png/001-stone.png">
+</button>
+			<button class="paper"><img src="png/003-blank-file.png"></button>
+			<button class="scissors"><img src="png/002-cut.png"></button>
+		</div>
+	</div>	
 </body>
 <script type="text/javascript">
+
+
 	
-	let playerScore=0;
-	let computerScore=0;
-	let numberGames;
+//all general variables and constant
+
+	let computerScore = 0;
+	let playerScore = 0;
+	let draws = 0;
+	let numberRounds = 0;
+	let score = 0;
+	let playerChoice = "";
+	let computerChoice = "";
+	let choices = [ 
+	"rock",
+	"paper",
+	"scissors"
+	];
 
 
+	const res = document.querySelector(".res");
+	const buttons = document.querySelectorAll("button");
+	const pScore = document.querySelector("#p-score");
+	const cScore = document.querySelector("#c-score");
+	const header = document.querySelector(".header");
+	const again = document.createElement("again");
+
+
+//Radomly produce a computer choice
+	
 
 
 	function computerPlay() {
-		let result = Math.floor((Math.random() * 3));
-		if (result == 2) {
-			return  "rock";
-		} else if (result == 1) {
-			return  "paper";
+		 computerChoice = choices[Math.floor(Math.random() * choices.length)]		
+		 return computerChoice
+		
+		}	
+
+//Start round after click on choice. Input player choice inside computerPlay
+
+	
+	buttons.forEach(button => {
+		button.addEventListener("click", () => {
+			playRound(button.className,computerPlay());
+			scoreUpdate();
+			getWiner();
+		})
+	})
+
+
+//Produce the result of the round. 
+//Output the result to <div class=res>
+
+
+	function playRound(playerChoice,computerChoice) {
+
+		if (playerChoice == computerChoice) {
+			++draws
+			res.textContent = "IT'S A DRAW!"
+			
+		} else if (playerChoice == "rock") {
+			if (computerChoice == "scissors") {
+				++playerScore
+				res.textContent = "YOU WON! " + playerChoice + " beats " + computerChoice;
+
+			} else {
+				++computerScore;
+				res.textContent = "YOU LOST! " + computerChoice + " beats " + playerChoice;
+			}
+		} else if (playerChoice == "paper") {
+			if (computerChoice == "rock") {
+				++playerScore
+				res.textContent = "YOU WON! " + playerChoice + " beats " + computerChoice;
+			} else {
+				++computerScore;
+				res.textContent = "YOU LOST! " + computerChoice + " beats " + playerChoice;
+			}
 		} else {
-			return "scissors";
+			if (computerChoice == "paper") {
+				++playerScore
+				res.textContent = "YOU WON! " + playerChoice + " beats " + computerChoice;
+				} else {
+				++computerScore;
+				res.textContent = "YOU LOST! " + computerChoice + " beats " + playerChoice;
+			}
 		}
-		// body...
+
 	}
 
-	function playRound (playerSelection,computerSelection) {
-		let imput = prompt("Rock, Scissors or Paper");
-		playerSelection = imput.toLowerCase();
+//Output score
+	
+	function scoreUpdate() {
+		pScore.textContent = playerScore;
+		cScore.textContent = computerScore;
+	}
 
-		if (playerSelection == computerSelection){
-			result == "draw"
-		} else if (playerSelection == "rock") {
-			if (computerSelection == "scissors") {
-				return  ["You Win!","Score: player " + ++playerScore + "computer " + computerScore];
-			} else {
-				return ["You Lose!","Score: player " + playerScore + "computer " + ++computerScore];
-			}
+
+//Get the winner
+	
+	function getWiner() {
+		numberRounds = playerScore + computerScore + draws;
+
+		if (numberRounds > 10) {
 			
-		} else if (playerSelection == "scissors"){
-			if (computerSelection == "rock") {
-				return "You Lose!",++c;
+		}else if (numberRounds == 10) {
+			if (computerScore == playerScore) {
+				header.textContent =  "TIE GAME"
+			} else if (playerScore > computerScore) {
+				header.textContent = "PLAYER WINS!"
 			} else {
-				return "You Win",++p;
+				header.textContent = "COMPUTER WINS"
 			}
-		} else if (playerSelection == "paper") {
-			if (computerSelection == "rock") {
-				return "You Win!",++p;
-			} else {
-				return "You Lose!",++c
-			}
-		// body...
+			playerScore = 0;
+			computerScore = 0;
+			draws = 0;
+			scoreUpdate()
+		} else {
+			header.textContent = 10 - numberRounds + " ROUNDS LEFT"
 		}
-
-	const playerSelection = "paper";
-	const computerSelection = computerPlay ();
-	console.log(playRound(playerSelection,computerSelection));
-
+		}
 
 
 </script>
